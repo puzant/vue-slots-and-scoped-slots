@@ -20,8 +20,11 @@
     </ul>
 
     <slot name="exmaple-title"></slot>
+    <slot name="paragraph-text"></slot>
     
     <slot name="notificationData" :notifications="notifications"></slot>
+
+    <slot name="namesData" :names="names"></slot>
 
   </div>
 </template>
@@ -42,7 +45,8 @@ export default {
         {name: 'warning', hexColor: '#FA3E3E'},
         {name: 'info', hexColor: '#005EB2'},
         {name: 'error', hexColor: '#FFCA00'},
-      ]
+      ],
+      names: ['mary', 'anna', 'sam', 'maxine', 'clara']
     };
   },
 

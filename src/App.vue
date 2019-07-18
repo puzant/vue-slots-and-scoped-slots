@@ -43,11 +43,22 @@
       <template slot="tasks-header-title">
         <h1>These are the custumized slots</h1>
       </template>
-      
+
       <template slot="task" slot-scope="props">
         <p class="slot-task" v-for="(t) in props.tasks" :key="t.id" :style="{ backgroundColor: t.backgroundColor }">{{t.name}}</p>
       </template>
     </Tasks>
+
+    <hr>
+
+    <ImageGallery>
+      <template slot="gallery">
+
+          <h3>Winter is here</h3>
+
+        <img src="./assets/pexels-photo-306825.jpeg" alt="">
+      </template>
+    </ImageGallery >
 
   </div>
 </template>
@@ -56,13 +67,15 @@
 import Hello from "./components/Hello";
 import HelloWorld from "./components/HelloWorld";
 import Tasks from "./components/Tasks"
+import ImageGallery from "./components/ImageGallery"
 
 export default {
   name: "App",
   components: {
     Hello,
     HelloWorld,
-    Tasks
+    Tasks,
+    ImageGallery
   },
   methods: {
     greet() {
@@ -122,6 +135,18 @@ hr {
   border-radius: 5px;
   color: #111;
   font-weight: bold;
+}
+
+img {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  opacity: .7;
+  transition: .2s;
+}
+
+img:hover {
+  opacity: 1;
+  cursor: pointer;
 }
 
 </style>

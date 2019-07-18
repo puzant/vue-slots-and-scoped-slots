@@ -1,8 +1,11 @@
 <template>
   <div class="tasks-container">
+
     <slot name="tasks-header-title">
       <h1>This is default header title</h1>
+    
     </slot>
+    
     <slot name="task" :tasks="tasks">
       <p v-for="task in tasks" class="task-default-style" :key="task.id">{{task.name}}</p>
     </slot>
@@ -16,11 +19,11 @@ export default {
     return {
       test: 'this is a test text',
       tasks: [
-        {id: 1, name: "get milk", backgroundColor: "#F4D03F"},
-        {id: 2, name: "repair car", backgroundColor: "#229954"},
-        {id: 3, name: "get the children from school", backgroundColor: "#9B59B6"},
-        {id: 4, name: "buy new coat", backgroundColor: "#FFCA00"},
-        {id: 5, name: "finish the assignment", backgroundColor: "#005EB2"},
+        {id: 1, title: 'your task',name: "get milk", backgroundColor: "#F4D03F"},
+        {id: 2, title: 'your task',name: "repair car", backgroundColor: "#229954"},
+        {id: 3, title: 'your task',name: "get the children from school", backgroundColor: "#9B59B6"},
+        {id: 4, title: 'your task',name: "buy new coat", backgroundColor: "#FFCA00"},
+        {id: 5, title: 'your task',name: "finish the assignment", backgroundColor: "#005EB2"},
       ]
     }
   }

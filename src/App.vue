@@ -2,7 +2,7 @@
   <div id="app">
     <HelloWorld msg="VueJs frameWork" />
     <hello>
-      <img slot="vuejs-image" width="25%" src="./assets/logo.png">
+      <img slot="vuejs-image" width="15%" src="./assets/logo.png">
 
       <h2 slot="line1">hello there</h2>
       <hr slot="seperator">
@@ -20,26 +20,49 @@
       <p slot-scope="defaultSlotText">{{defaultSlotText.text}}</p>
 
       <h2 slot="exmaple-title">another example with scoped slots</h2>
+      <p slot="paragraph-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus error cum inventore atque asperiores blanditiis voluptatibus autem numquam illo doloribus? Voluptatum ipsa minima quo reiciendis magni adipisci repellendus laboriosam accusantium.</p>
 
       <div slot="notificationData" slot-scope="props">
-        <div class="notification-container" v-for="(item) in props.notifications">
+        <div class="notification-container" v-for="(item) in props.notifications" :key="item.id">
           <p class="notification" :style=" { background: item.hexColor } ">{{item.name}}</p>
         </div>
       </div> 
 
+      <div slot="namesData" slot-scope="props"> <!-- props is used to acces the child component data -->
+        <div class="names-container" v-for="(name) in props.names" :key="name.id">
+          <p class="names">{{name}}</p>
+        </div>
+      </div>
+
     </hello>
+
+    <hr>
+
+    <Tasks>
+      <!-- custumized slots code here -->
+      <template slot="tasks-header-title">
+        <h1>These are the custumized slots</h1>
+      </template>
+      
+      <template slot="task" slot-scope="props">
+        <p class="slot-task" v-for="(t) in props.tasks" :key="t.id" :style="{ backgroundColor: t.backgroundColor }">{{t.name}}</p>
+      </template>
+    </Tasks>
+
   </div>
 </template>
 
 <script>
 import Hello from "./components/Hello";
 import HelloWorld from "./components/HelloWorld";
+import Tasks from "./components/Tasks"
 
 export default {
   name: "App",
   components: {
     Hello,
-    HelloWorld
+    HelloWorld,
+    Tasks
   },
   methods: {
     greet() {
@@ -89,6 +112,16 @@ hr {
   padding: 4px;
   width: 30%;
   border-radius: 5px;
+}
+
+.slot-task {
+  margin: 10px;
+  display: inline-block;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #111;
+  font-weight: bold;
 }
 
 </style>

@@ -2,7 +2,18 @@
   <div id="app">
     <HelloWorld msg="VueJs frameWork" />
     <hello>
-      <img slot="vuejs-image" width="15%" src="./assets/logo.png">
+
+      <template slot="vuejs-image" slot-scope="props">
+        <transition name="slex-fade">
+          <img v-show="props.showImage" width="15%" src="./assets/logo.png">
+        </transition>
+        <br>
+        <button @click="showHideDate()"> show / hide Date </button>
+        <transition name="slex-fade">
+          <p v-show="shouldShowDate">{{props.date}}</p>
+        </transition>
+      </template>
+      
 
       <h2 slot="line1">hello there</h2>
       <hr slot="seperator">
@@ -36,7 +47,9 @@
 
     </hello>
 
-    <hr>
+    <transition name="slex-fade">
+      <hr v-show="showLine">
+    </transition>
 
     <Tasks>
       <!-- custumized slots code here -->
@@ -45,7 +58,17 @@
       </template>
 
       <template slot="task" slot-scope="props">
-        <p class="slot-task" v-for="(t) in props.tasks" :key="t.id" :style="{ backgroundColor: t.backgroundColor }">{{t.name}}</p>
+        <transition-group name="slex-fade">    
+          <p 
+            class="slot-task"
+            v-for="(t, index) in props.tasks"
+            :key="t.id"
+            :style="{ backgroundColor: t.backgroundColor }">
+
+            {{t.name}}
+          </p>
+        </transition-group>
+        
       </template>
     </Tasks>
 
@@ -54,9 +77,9 @@
     <ImageGallery>
       <template slot="gallery">
 
-          <h3>Winter is here</h3>
-
+        <h3>Winter is here</h3>
         <img src="./assets/pexels-photo-306825.jpeg" alt="">
+
       </template>
     </ImageGallery >
 
@@ -71,6 +94,13 @@ import ImageGallery from "./components/ImageGallery"
 
 export default {
   name: "App",
+  data() {
+    return {
+      showLine: true,
+      shouldShowDate: true,
+      shouldShowDeleteBtn: false
+    }
+  },
   components: {
     Hello,
     HelloWorld,
@@ -80,6 +110,11 @@ export default {
   methods: {
     greet() {
       alert("hello there,I am greeting you from the parent");
+    },
+
+    showHideDate() {
+      if (this.shouldShowDate) return this.shouldShowDate = false
+        return this.shouldShowDate = true
     }
   }
 };
@@ -137,6 +172,12 @@ hr {
   font-weight: bold;
 }
 
+.delete-task {
+  content: "X";
+  margin-left: 20px;
+  color: #fff;
+}
+
 img {
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -147,6 +188,13 @@ img {
 img:hover {
   opacity: 1;
   cursor: pointer;
+}
+
+.slex-fade-enter-active, .slex-fade-leave-active {
+  transition: opacity .5s;
+}
+.slex-fade-enter, .slex-fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 
 </style>

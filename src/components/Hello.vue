@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <!-- add the image here as slot -->
-    <slot name="vuejs-image"></slot>
+    <slot name="vuejs-image" :showImage="showImage" :date="date"></slot>
     <slot name="line1"></slot>
     <slot name="seperator"></slot>
     <slot name="line2"></slot>
@@ -46,7 +46,9 @@ export default {
         {name: 'info', hexColor: '#005EB2'},
         {name: 'error', hexColor: '#FFCA00'},
       ],
-      names: ['mary', 'anna', 'sam', 'maxine', 'clara']
+      names: ['mary', 'anna', 'sam', 'maxine', 'clara'],
+      showImage: true,
+      date: new Date()
     };
   },
 
@@ -87,6 +89,6 @@ li {
   border-radius: 5px;
   width: 30%;
   font-weight: bold;
-
 }
+
 </style>

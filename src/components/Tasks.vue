@@ -9,13 +9,15 @@
       Add a new task
     </div>
 
-      <div class="show-hide-tasks" @click="showHideTasks()"> Show / Hide tasks </div>
+    <div class="show-hide-tasks" @click="showHideTasks()"> Show / Hide tasks </div>
 
-      <div class="added-tasks-container">
-          <slot v-if="shouldShowNotes" name="task" :tasks="tasks">
+    <transition name="slex-fade-shrink-grow">
+      <div v-if="shouldShowNotes" class="added-tasks-container">
+          <slot name="task" :tasks="tasks">
             <p v-for="task in tasks" class="task-default-style" :key="task.id">{{task.name}}</p>
           </slot>
       </div>
+    </transition>
       
 
   </div>
@@ -72,6 +74,7 @@ export default {
   background-color:#edeef0;
   padding: 10px;
   border-radius: 5px;
+  max-height: 999px;
 }
 
 
@@ -125,4 +128,12 @@ export default {
   opacity: 0;
 }
 
+
+.slex-fade-shrink-grow-enter-active, .slex-fade-shrink-grow-leave-active {
+  transition: all 1s;
+}
+.slex-fade-shrink-grow-enter, .slex-fade-shrink-grow-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  max-height: 0;
+}
 </style>

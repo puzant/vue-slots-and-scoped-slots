@@ -26,6 +26,8 @@
 
     <slot name="namesData" :names="names"></slot>
 
+    <button @click="test()">Testing Events</button>
+
   </div>
 </template>
 
@@ -48,7 +50,9 @@ export default {
       ],
       names: ['mary', 'anna', 'sam', 'maxine', 'clara'],
       showImage: true,
-      date: new Date()
+      date: new Date(),
+      eventText: 'this is a event text! dah',
+      numbers: [1,2,3,4,5,5,6,7,8]
     };
   },
 
@@ -59,6 +63,10 @@ export default {
 
     findTheColorName(s) {
      return s.colorName
+    },
+
+    test() {
+      this.$emit('passData', this.numbers)
     }
 
   }

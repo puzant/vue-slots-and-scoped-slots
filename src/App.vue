@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <HelloWorld msg="VueJs frameWork" />
-    <hello>
+    <hello @passData="showE">
 
       <template slot="vuejs-image" slot-scope="props">
         <transition name="slex-fade">
@@ -110,6 +110,10 @@ export default {
   methods: {
     greet() {
       alert("hello there,I am greeting you from the parent");
+    },
+
+    showE(props) {
+      console.log('passed from the child', props)
     },
 
     showHideDate() {
